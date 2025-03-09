@@ -1,8 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
-import { Separator } from '@radix-ui/react-separator';
-import { CircleUserRound, Link } from 'lucide-react'
+import { CircleUserRound, } from 'lucide-react'
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { Separator } from './ui/separator';
 // import React from 'react'
 
 export default function UsernameMenu() {
@@ -15,6 +16,11 @@ export default function UsernameMenu() {
             {user?.email}
         </DropdownMenuTrigger>
         <DropdownMenuContent>
+        <DropdownMenuItem>        
+            <Link to="/Manage-restaurant" className="font-bold hover:text-orange-500">
+            Manage Restaurant
+            </Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>        
             <Link to="/user-profile" className="font-bold hover:text-orange-500">
             User Profile
