@@ -26,7 +26,6 @@ import {
             <PaginationItem>
               <PaginationPrevious
                 href="#"
-                size="sm"
                 onClick={() => onPageChange(page - 1)}
               />
             </PaginationItem>
@@ -36,7 +35,6 @@ import {
             <PaginationItem>
               <PaginationLink
                 href="#"
-                size=""
                 onClick={() => onPageChange(number)}
                 isActive={page === number}
               >
@@ -47,7 +45,7 @@ import {
   
           {page !== pageNumbers.length && (
             <PaginationItem>
-              <PaginationNext href="#" size="sm" onClick={() => onPageChange(page + 1)} />
+              <PaginationNext href="#" onClick={() => onPageChange(page + 1)} />
             </PaginationItem>
           )}
         </PaginationContent>
