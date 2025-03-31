@@ -56,27 +56,38 @@ export const useCreateCheckoutSession = () => {
   const createCheckoutSessionRequest = async (
     checkoutSessionRequest: CheckoutSessionRequest
   ) => {
-    const accessToken = await getAccessTokenSilently();
+    try {
+      const accessToken = await getAccessTokenSilently({ cacheMode: "off" });
 
-    const response = await fetch(
-      `${API_BASE_URL}/api/order/checkout/create-checkout-session`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(checkoutSessionRequest),
+      console.log("API Base URL:", API_BASE_URL);
+      console.log("Checkout Session Request Body:", checkoutSessionRequest);
+
+      const response = await fetch(
+        `${API_BASE_URL}/api/order/checkout/create-checkout-session`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(checkoutSessionRequest),
+        }
+      );
+
+      console.log("Checkout Session Response Status:", response.status);
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error("Checkout session error response:", errorMessage);
+        throw new Error(errorMessage || "Unable to create checkout session");
       }
-    );
 
-    if (!response.ok) {
-      throw new Error("Unable to create checkout session");
+      return response.json();
+    } catch (error: any) {
+      console.error("Error creating checkout session:", error);
+      throw error;
     }
-
-    return response.json();
   };
-
   const {
     mutateAsync: createCheckoutSession,
     isLoading,

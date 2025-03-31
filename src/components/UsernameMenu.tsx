@@ -29,7 +29,7 @@ export default function UsernameMenu() {
             <Separator />
             <DropdownMenuItem>
                 <Button onClick={() => logout()}
-                className="flex flex-1 font-bold bg-orange-500">
+                className="flex flex-1 font-bold bg-orange-500 rounded-xl hover:bg-gray-500">
                     Log Out
                 </Button>
             </DropdownMenuItem>
